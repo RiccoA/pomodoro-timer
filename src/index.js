@@ -31,11 +31,17 @@ class Timer extends React.Component {
   }
 
   displayMinutes(milliSecs) {
-    return Math.floor((milliSecs/1000/60) << 0);
+    const minutes = Math.floor((milliSecs/1000/60) << 0);
+    return this.formatClockDigits(minutes);
   }
 
   displaySeconds(milliSecs) {
-    return Math.floor((milliSecs/1000) % 60);
+    const seconds =  Math.floor((milliSecs/1000) % 60);
+    return this.formatClockDigits(seconds);
+  }
+
+  formatClockDigits(n) {
+    return n > 9 ? "" + n : "0" + n;
   }
 
   render() {
