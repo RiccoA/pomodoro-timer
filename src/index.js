@@ -3,14 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 class Timer extends React.Component {
+
   constructor(props){
     super(props);
-    this.state = {time: Date.now()};
-    this.onReset = this.onReset.bind(this);
+    const defaultTime = 25 * 60 * 1000;
+    this.state = {defaultTime: defaultTime, time: defaultTime};
+    this.onClick = this.onClick.bind(this);
   }
   
-  onReset(e) {
-    this.setState({time: Date.now()});
+  onClick(e) {
+    this.setState({time: this.state.defaultTime});
   }
 
   displayMinutes(milliSecs) {
@@ -25,7 +27,7 @@ class Timer extends React.Component {
     return (
       <div>
         <h1>{this.displayMinutes(this.state.time)}:{this.displaySeconds(this.state.time)}</h1>
-        <button onClick={this.onReset}>Reset</button>
+        <button onClick={this.onClick}>Reset</button>
       </div>
     );
   }
