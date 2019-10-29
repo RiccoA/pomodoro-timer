@@ -15,6 +15,21 @@ class Timer extends React.Component {
     this.setState({time: this.state.defaultTime});
   }
 
+  componentDidMount() {
+    this.interval = setInterval(() => this.tick(), 10);
+  }
+
+  // ticks down the time by 1 seconds if able to
+  tick() {
+    if (this.state.time <= 0) return;
+
+    this.setState({time: this.state.time - 1000})
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   displayMinutes(milliSecs) {
     return Math.floor((milliSecs/1000/60) << 0);
   }
