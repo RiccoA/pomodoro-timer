@@ -7,12 +7,27 @@ class Timer extends React.Component {
   constructor(props){
     super(props);
     const defaultTime = 25 * 60 * 1000;
-    this.state = {defaultTime: defaultTime, time: defaultTime};
-    this.onClick = this.onClick.bind(this);
+    this.state = {
+      defaultTime: defaultTime,
+      time: defaultTime,
+      running: false
+    };
+
+    this.onReset = this.onReset.bind(this);
+    this.onStart = this.onStart.bind(this);
+    this.onStop = this.onStop.bind(this);
   }
   
-  onClick(e) {
-    this.setState({time: this.state.defaultTime});
+  onReset(e) {
+    this.setState({time: this.state.defaultTime, running: false});
+  }
+
+  onStop(e) {
+    this.setState({running: false});
+  }
+
+  onStart(e) {
+    this.setState({running: true});
   }
 
   componentDidMount() {
@@ -22,6 +37,7 @@ class Timer extends React.Component {
   // ticks down the time by 1 seconds if able to
   tick() {
     if (this.state.time <= 0) return;
+    if (!this.state.running) return;
 
     this.setState({time: this.state.time - 1000})
   }
@@ -48,7 +64,9 @@ class Timer extends React.Component {
     return (
       <div>
         <h1>{this.displayMinutes(this.state.time)}:{this.displaySeconds(this.state.time)}</h1>
-        <button onClick={this.onClick}>Reset</button>
+        <button onClick={this.onStart}>Start</button>
+        <button onClick={this.onStop}>Stop</button>
+        <button onClick={this.onReset}>Reset</button>
       </div>
     );
   }
