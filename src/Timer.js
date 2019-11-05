@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 import { Display } from './Display';
 
 export class Timer extends React.Component {
@@ -38,11 +39,13 @@ export class Timer extends React.Component {
     clearInterval(this.interval);
   }
   render() {
-    return (<div>
+    return (
+    <div>
       <h1><Display time={this.state.time} /></h1>
-      <button onClick={this.onStart}>Start</button>
-      <button onClick={this.onStop}>Stop</button>
-      <button onClick={this.onReset}>Reset</button>
-    </div>);
+      <Button variant="contained" color="primary" onClick={this.onStart}>Start</Button>
+      <Button variant="contained" color="secondary" onClick={this.onStop}>Stop</Button>
+      <Button variant="contained" onClick={this.onReset}>Reset</Button>
+    </div>
+    );
   }
 }
