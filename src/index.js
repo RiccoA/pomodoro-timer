@@ -46,6 +46,20 @@ class Timer extends React.Component {
     clearInterval(this.interval);
   }
 
+  render() {
+    return (
+      <div>
+        <h1><Display time={this.state.time}/></h1>
+        <button onClick={this.onStart}>Start</button>
+        <button onClick={this.onStop}>Stop</button>
+        <button onClick={this.onReset}>Reset</button>
+      </div>
+    );
+  }
+}
+
+class Display extends React.Component
+{
   displayMinutes(milliSecs) {
     const minutes = Math.floor((milliSecs/1000/60) << 0);
     return this.formatClockDigits(minutes);
@@ -60,18 +74,14 @@ class Timer extends React.Component {
     return n > 9 ? "" + n : "0" + n;
   }
 
-  render() {
+  render () {
     return (
-      <div>
-        <h1>{this.displayMinutes(this.state.time)}:{this.displaySeconds(this.state.time)}</h1>
-        <button onClick={this.onStart}>Start</button>
-        <button onClick={this.onStop}>Stop</button>
-        <button onClick={this.onReset}>Reset</button>
-      </div>
-    );
+      <>
+        {this.displayMinutes(this.props.time)}:{this.displaySeconds(this.props.time)}
+      </>
+    ); 
   }
 }
-
 
 // ========================================
   
